@@ -6,8 +6,9 @@ user_location = user_location.gsub(" ", "%20")
 
 p user_location
 
-# gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + user_location + "&key=AIzaSyAgRzRHJZf-uoevSnYDTf08or8QFS_fb3U"
-gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{user_location}&key=AIzaSyAgRzRHJZf-uoevSnYDTf08or8QFS_fb3U"
+gmaps_key = ENV.fetch("GMAPS_KEY")
+
+gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{user_location}&key=#{gmaps_key}"
 
 
 
@@ -30,4 +31,7 @@ p longitude
 
 #use coords from gmaps to compose URL. Read, parse and print current temp. read probability of precipitation. create conditional to reccomend umbrella or not 
 
-#Dark ski url
+darksky_key = ENV.fetch("DARK_SKY_KEY")
+darksky_url = "https://api.darksky.net/forecast/#{darksky_key}/#{latitude},#{longitude}"
+darksky_output = URI.open(darksky_url).read
+p darksky_output
